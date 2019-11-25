@@ -5,7 +5,7 @@ namespace Src\Controller;
 
 use Src\TableGateways\UserGateway;
 
-class UserController
+class UserController implements iController
 {
     private $db;
     private $requestMethod;
@@ -41,7 +41,6 @@ class UserController
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
-//        return json_encode($result);
     }
 
 

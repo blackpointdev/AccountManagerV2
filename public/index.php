@@ -18,7 +18,7 @@ if ($uri[1] !== 'user') {
 
 $userId = null;
 if (isset($uri[2])) {
-    $userId = (int) $uri[2];
+    $userId = $uri[2];
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];

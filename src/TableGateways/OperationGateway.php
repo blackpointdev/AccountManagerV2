@@ -6,21 +6,12 @@ namespace Src\TableGateways;
 
 use MongoDB\BSON\ObjectId;
 
-class UserGateway implements iGateway
+class OperationGateway implements iGateway
 {
-    private $db = null;
-    private $dbName;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-        $this->dbName = getenv('DB_DATABASE');
-    }
 
     public function findAll()
     {
-        $users = $this->db->{$this->dbName}->Users;
-        return $users->find()->toArray();
+        // TODO: Implement findAll() method.
     }
 
     public function find(ObjectId $id)

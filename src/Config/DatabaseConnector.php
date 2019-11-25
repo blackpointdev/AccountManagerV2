@@ -10,7 +10,6 @@ class DatabaseConnector
     {
         $host = getenv('DB_HOST');
         $port = getenv('DB_PORT');
-        $db   = getenv('DB_DATABASE');
         $user = getenv('DB_USERNAME');
         $pass = getenv('DB_PASSWORD');
 
