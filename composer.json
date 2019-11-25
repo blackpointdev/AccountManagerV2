@@ -1,0 +1,24 @@
+{
+    "name": "blackpoint/account-manager-v2",
+    "description": "WebAPI for Account Manager system by blackpoint.",
+    "type": "project",
+
+    "require": {
+        "mongodb/mongodb": "^1.5",
+        "vlucas/phpdotenv": "^2.4",
+        "ext-json": "*",
+        "ext-mongodb": "*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "blackpoint",
+            "email": "marcinw1998@gmail.com"
+        }
+    ]
+}
