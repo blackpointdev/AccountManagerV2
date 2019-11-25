@@ -13,7 +13,7 @@ class UserController implements iController
 
     private $userGateway;
 
-    public function __construct($db, $requestMethod, $userId)
+    public function __construct($db, $requestMethod = null, $userId = null)
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
@@ -21,6 +21,7 @@ class UserController implements iController
 
         $this->userGateway = new UserGateway($db);
     }
+
 
     public function processRequest()
     {
@@ -44,4 +45,13 @@ class UserController implements iController
     }
 
 
+    public function setRequestMethod($requestMethod)
+    {
+        $this->requestMethod = $requestMethod;
+    }
+
+    public function setTargetId($id)
+    {
+        $this->userId = $id;
+    }
 }
