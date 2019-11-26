@@ -5,25 +5,77 @@ namespace Src\Controller;
 
 
 
+use Src\TableGateways\OperationGateway;
+
 class OperationController implements iController
 {
-    public function __construct($dbConnection, $requestMethod = null, $userId = null)
-    {
+    private $db;
+    private $requestMethod;
+    private $operationId;
 
+    private $operationGateway;
+
+    public function __construct($dbConnection, $requestMethod = null, $operationId = null)
+    {
+        $this->db = $dbConnection;
+        $this->requestMethod = $requestMethod;
+        $this->operationId = $operationId;
+
+        $this->operationGateway = new OperationGateway($dbConnection);
     }
 
     public function processRequest()
     {
-        // TODO: Implement processRequest() method.
+        switch ($this->requestMethod)
+        {
+            case 'GET':
+                if($this->operationId) {
+                    $response = $this->getOperation($this->operationId);
+                } else {
+                    $response = $this->getAllOperations();
+                }
+        }
+
+        header($response['status_code_header']);
+        if ($response['body'])
+        {
+            echo $response['body'];
+        }
+    }
+
+    private function getAllOperations()
+    {
+        $result = $this->operationGateway->findAll();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    private function getOperation($id)
+    {
+        $result = $this->operationGateway->find($id);
+        if (! $result) {
+            return $this->notFoundResponse();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
     public function setRequestMethod($requestMethod)
     {
-        // TODO: Implement setRequestMethod() method.
+        $this->requestMethod = $requestMethod;
     }
 
     public function setTargetId($id)
     {
-        // TODO: Implement setTargetId() method.
+        $this->operationId = $id;
+    }
+
+    private function notFoundResponse()
+    {
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
     }
 }

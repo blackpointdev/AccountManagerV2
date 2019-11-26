@@ -13,13 +13,13 @@ class UserController implements iController
 
     private $userGateway;
 
-    public function __construct($db, $requestMethod = null, $userId = null)
+    public function __construct($dbConnection, $requestMethod = null, $userId = null)
     {
-        $this->db = $db;
+        $this->db = $dbConnection;
         $this->requestMethod = $requestMethod;
         $this->userId = $userId;
 
-        $this->userGateway = new UserGateway($db);
+        $this->userGateway = new UserGateway($dbConnection);
     }
 
 
