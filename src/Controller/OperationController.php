@@ -38,7 +38,12 @@ class OperationController implements iController
             case 'POST':
                 $response = $this->createOperationFromRequest();
                 break;
-
+            case 'DELETE':
+                $response = $this->deleteUser($this->operationId);
+                break;
+            default:
+                $response = $this->notFoundResponse();
+                break;
         }
 
         header($response['status_code_header']);
@@ -52,10 +57,11 @@ class OperationController implements iController
     {
         $result = $this->operationGateway->findAll();
 
-        foreach ($result as $operation)
-        {
-            $operation['date'] = $operation['date'].serialize();
-        }
+        // I don't know if serialization is necessary here
+//        foreach ($result as $operation)
+//        {
+//            $operation['date'] = $operation['date'].serialize();
+//        }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
@@ -67,6 +73,8 @@ class OperationController implements iController
         if (! $result) {
             return $this->notFoundResponse();
         }
+        // Again, dunno if serialization is necessary
+//        $result['date'] = serialize($result['date']);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
@@ -85,6 +93,25 @@ class OperationController implements iController
         return $response;
     }
 
+    private function updateUserFromRequest($id)
+    {
+        //TODO implementation of updateUserFromRequest
+    }
+
+    private function deleteUser($id)
+    {
+        $result = $this->operationGateway->find($id);
+        if ($result == null) {
+            return $this->notFoundResponse();
+        }
+        $this->operationGateway->delete($id);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = null;
+        return $response;
+    }
+
+    // Setters
+
     public function setRequestMethod($requestMethod)
     {
         $this->requestMethod = $requestMethod;
@@ -94,6 +121,8 @@ class OperationController implements iController
     {
         $this->operationId = $id;
     }
+
+    // Validation
 
     private function validateOperation($input)
 {

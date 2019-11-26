@@ -53,6 +53,8 @@ class OperationGateway implements iGateway
         {
             throw new RuntimeException("Input array is empty.");
         }
+
+        return $result;
     }
 
     public function update(ObjectId $id, array $input)
@@ -60,8 +62,9 @@ class OperationGateway implements iGateway
         // TODO: Implement update() method.
     }
 
-    public function delete(ObjectId $id)
+    public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $result = $this->operations->deleteOne(['_id' => new ObjectId($id)]);
+        return $result;
     }
 }
