@@ -18,10 +18,10 @@ if ($uri[1] === 'api')
     {
         $controller = new OperationController($dbConnection);
     }
-    elseif($uri[2] === 'user')
-    {
-        $controller = new UserController($dbConnection);
-    }
+//    elseif($uri[2] === 'user')
+//    {
+//        $controller = new UserController($dbConnection);
+//    }
     else
     {
         header("HTTP/1.1 404 Not Found");
