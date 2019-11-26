@@ -3,9 +3,11 @@
 
 namespace Src\TableGateways;
 
-
 use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Collection;
+use MongoDB\Exception\Exception;
+use MongoDB\Exception\RuntimeException;
 
 class OperationGateway implements iGateway
 {
@@ -40,7 +42,17 @@ class OperationGateway implements iGateway
 
     public function insert(array $input)
     {
-        // TODO: Implement insert() method.
+        $result = $this->operations->insertOne(array(
+            'name' => $input['name'],
+            'amount' => $input['amount'],
+            'userID' => new ObjectId($input['userID']),
+            'date' => new UTCDateTime($input['date'])
+        ));
+
+        if (!$result)
+        {
+            throw new RuntimeException("Input array is empty.");
+        }
     }
 
     public function update(ObjectId $id, array $input)
