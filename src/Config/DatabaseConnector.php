@@ -19,7 +19,7 @@ class DatabaseConnector
         }
         else
         {
-            $connection_string = "mongodb://" . $user . ":" . $pass . "@" . $host . ":" . $port;
+            $connection_string = "mongodb+srv://" . $user . ":" . $pass . "@" . $host;
         }
 
         try
