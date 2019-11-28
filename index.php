@@ -24,15 +24,13 @@ if ($uri[1] === 'api')
 //    }
     else
     {
-        echo "Coś poszło nie tak";
-        // header("HTTP/1.1 404 Not Found");
+        header("HTTP/1.1 404 Not Found");
         exit();
     }
 }
 else
 {
-    echo "Coś poszło nie tak";
-    // header("HTTP/1.1 404 Not Found");
+    header("HTTP/1.1 404 Not Found");
     exit();
 }
 
