@@ -1,5 +1,5 @@
 <?php
-require "bootstrap.php";
+require "../bootstrap.php";
 use Src\Controller\UserController;
 use Src\Controller\OperationController;
 
