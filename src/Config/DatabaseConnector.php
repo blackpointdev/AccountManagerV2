@@ -8,6 +8,7 @@ class DatabaseConnector
 
     public function __construct()
     {
+        // These env variables are set through Heroku 
         $host = getenv('DB_HOST');
         $port = getenv('DB_PORT');
         $user = getenv('DB_USERNAME');
